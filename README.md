@@ -21,4 +21,4 @@ A  coding agent built with the Google Gemini API. It can explore a working direc
 - `config.py` — configuration constants
 
 ## Prompt for OS Lab
-- "Find the pdf file in the directory and extract examples from it in the form of ex1.c and so on and write all the example in seperate .c files in the convention ex1.c also complete all the tasks and write them in seperate .c file" 
+- `"Find the pdf file in the directory and extract examples from it in the form of ex1.c and so on and write all the example in seperate .c files in the convention ex1.c also you have to solve and write  all the tasks and write them in seperate .c file" `
