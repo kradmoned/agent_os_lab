@@ -3,12 +3,13 @@ from functions.get_files_info import schema_get_files_info,get_files_info
 from functions.get_file_content import schema_get_file_content,get_file_content
 from functions.write_file import schema_write_file,write_file
 from functions.run_python_file import schema_run_python_file ,run_python_file
+from functions.get_pdf_content import schema_get_pdf_content, get_pdf_content
 from config import WORKING_DIRECTORY
 # types.FunctionDeclaration -- describes a single function (its name, description, and parameters).
 # types.Tool -- a container that holds a list of FunctionDeclaration objects (related functions grouped together).
 available_functions = types.Tool(
     function_declarations=[
-        schema_run_python_file,
+        schema_run_python_file, schema_get_pdf_content,
         schema_get_file_content, schema_write_file, schema_get_files_info]
     )
 def call_function(function_call: types.FunctionCall, verbose=False):
@@ -21,7 +22,8 @@ def call_function(function_call: types.FunctionCall, verbose=False):
         "get_files_info" : get_files_info,
         "get_file_content": get_file_content,
         "write_file": write_file,
-        "run_python_file": run_python_file
+        "run_python_file": run_python_file,
+        "get_pdf_content": get_pdf_content
     }
     # function_call.name can be none in that case we assign it ""
     function_name = function_call.name or ""
