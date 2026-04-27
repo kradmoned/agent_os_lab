@@ -11,7 +11,8 @@ A  coding agent built with the Google Gemini API. It can explore a working direc
 1. Install dependencies with `uv sync`
 2. Add your `GEMINI_API_KEY` to a `.env` file
 3. Set `WORKING_DIRECTORY` in `config.py`
-4. Run: `uv run main.py "your prompt here"`
+4. For os lab replace `OS_Lab-08.pdf`  in `lab` with your pdf
+5. Run: `uv run main.py "your prompt here"`
 
 ## Project Structure
 - `main.py` — entry point and agent loop
