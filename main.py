@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from prompts import SYSTEM_PROMPT
 from call_function import available_functions
 from call_function import call_function
+import time
 def main():
     # create an argument parser object
     parser = argparse.ArgumentParser()
@@ -28,15 +29,23 @@ def main():
     # types.GenerateContentConfig -- takes a list of Tool objects via the tools parameter, alongside other config like system_instruction.
     config = types.GenerateContentConfig(system_instruction= SYSTEM_PROMPT, tools=[available_functions])
     response = None
-    for _ in range(20):
+    iterations = 0
+    for _ in range(40):
+        skip_flag = False
         try : 
             # clients.model is a sub object that contains the contains the method generate content that can either take a string prompt
             # or it can take a types.content list where each types.content can be thought as a single message between user and model
             # Types.content has two fields one is role other is "parts" which is a list of part because each message can contain multiple part such as an image and text
             #print([fd.name for fd in available_functions.function_declarations])
-            response = client.models.generate_content(model = "gemini-2.5-flash",contents = messages, config= config)
+            response = client.models.generate_content(model = "gemini-3-flash-preview",contents = messages, config= config)
+            
         except Exception as e:
-           raise Exception(e)
+            print(e)
+            time.sleep(40)
+            skip_flag = True
+        
+        if skip_flag:
+            continue
         # Each response has some meta data attached to it
         if response == None:
             raise RuntimeError("No response")
@@ -46,9 +55,10 @@ def main():
             raise RuntimeError("Failed Api Request")
         # Each response has candidate which is the models response to the prompt
         # Each candidate has content which is the types.content
-        if response.candidates:
-            for candidate in response.candidates:
-                messages.append(candidate.content)
+        messages.append(response.candidates[0].content)
+        # if response.candidates:
+        #     for candidate in response.candidates:
+        #         messages.append(candidate.content)
         if args.verbose == True:
             print(f"User prompt: {prompt}")
             # howing the number of tokens in the prompt that was sent to the model
