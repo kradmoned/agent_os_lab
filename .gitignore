@@ -1,2 +1,4 @@
 __pycache__
 .env
+/lab/task*
+/lab/ex*

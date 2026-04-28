@@ -29,7 +29,7 @@ def get_pdf_content(working_directory, file_path):
     except Exception as e:
         return f'Error: {e} occured'
     task_pattern = r"(Task\s+\d+.*?)(?=Task\s+\d+|Example\s+\d+|Section\s+\d+|$)"
-    example_pattern = r"(Example Task\s+\d+.*?|Example Problem.*?)(?=Task\s+\d+|Example\s+\d+|Section\s+\d+|Explanation|$)"
+    example_pattern = r"(Example Task\s+\d+.*?|Example Problem.*?|Problem.*?)(?=Task\s+\d+|Example\s+\d+|Section\s+\d+|Explanation|Problem|$)"
     example = re.findall(example_pattern,content,flags=re.IGNORECASE | re.DOTALL)
     task = re.findall(task_pattern, content, flags=re.IGNORECASE | re.DOTALL)
     total_exercise = example + task

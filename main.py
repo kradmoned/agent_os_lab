@@ -37,7 +37,7 @@ def main():
             # or it can take a types.content list where each types.content can be thought as a single message between user and model
             # Types.content has two fields one is role other is "parts" which is a list of part because each message can contain multiple part such as an image and text
             #print([fd.name for fd in available_functions.function_declarations])
-            response = client.models.generate_content(model = "gemini-3-flash-preview",contents = messages, config= config)
+            response = client.models.generate_content(model = "gemini-2.5-flash",contents = messages, config= config)
             
         except Exception as e:
             print(e)
